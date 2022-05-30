@@ -20,8 +20,7 @@ private int theatreid;
 private String theatrename;
 @Column(name="location",length=25)
 private String location;
-@Column(name="screens",length=25)
-private int screens;
+
 @Column(name="totaltickets",length=25)
 private int totaltickets;
 public int getTheatreid() {
@@ -42,12 +41,7 @@ public String getLocation() {
 public void setLocation(String location) {
 	this.location = location;
 }
-public int getScreens() {
-	return screens;
-}
-public void setScreens(int screens) {
-	this.screens = screens;
-}
+
 public int getTotaltickets() {
 	return totaltickets;
 }

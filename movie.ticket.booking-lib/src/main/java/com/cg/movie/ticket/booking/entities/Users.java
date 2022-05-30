@@ -35,11 +35,11 @@ public int getUserid() {
 public void setUserid(int userid) {
 	this.userid = userid;
 }
-public String getUserame() {
+public String getUsername() {
 	return username;
 }
-public void setUserame(String userame) {
-	this.username = userame;
+public void setUsername(String username) {
+	this.username = username;
 }
 public String getPassword() {
 	return password;

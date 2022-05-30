@@ -1,8 +1,10 @@
 package com.cg.movie.ticket.booking.dto;
 
 public class TheatreDto {
-   private String theatrename;
-   private String location;
+	private String theatrename;
+
+	private String location;
+  
   
 public String getTheatrename() {
 	return theatrename;

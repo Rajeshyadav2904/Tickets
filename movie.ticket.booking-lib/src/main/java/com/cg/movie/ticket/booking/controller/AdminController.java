@@ -18,13 +18,13 @@ import com.cg.movie.ticket.booking.dto.ShowDto;
 import com.cg.movie.ticket.booking.dto.TheatreDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
-import com.cg.movie.ticket.booking.services.adminServiceImpl;
+import com.cg.movie.ticket.booking.services.AdminServiceImpl;
 
 @RestController
 @RequestMapping("/admin")
-public class adminController{
+public class AdminController{
   @Autowired
-  adminServiceImpl adminservice;
+  AdminServiceImpl adminservice;
  
   @PostMapping()
   public ResponseEntity<String> registerUser(@RequestBody UserDto userdto){

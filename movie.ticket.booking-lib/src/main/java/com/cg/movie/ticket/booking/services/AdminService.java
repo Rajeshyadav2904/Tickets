@@ -7,7 +7,7 @@ import com.cg.movie.ticket.booking.dto.TheatreDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 
-public interface adminService{
+public interface AdminService{
 	int registerUser(UserDto userdto);
 	int addTheatre(TheatreDto theatredto);
     int addMovies(ShowDto showdto);

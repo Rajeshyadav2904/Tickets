@@ -17,7 +17,6 @@ public class ShowInchargeServiceImpl implements ShowInchargeService{
 	@Override
 	public int registerShowIncharge(ShowDto showdto) {
 		ShowInformation incharge = new ShowInformation();
-		incharge.setShowid(showdto.getShowid());
 		incharge.setDate(showdto.getDate());
 		return incharge.getShowid();
 		

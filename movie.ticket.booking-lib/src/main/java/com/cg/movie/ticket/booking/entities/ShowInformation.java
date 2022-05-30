@@ -20,8 +20,8 @@ public class ShowInformation {
 	private int showid;
 @Column(name="moviename",length=25)
 	private String moviename;
-@Column(name="nooftickets",length=25)
-	private int nooftickets;
+@Column(name="totalnooftickets",length=25)
+	private int totalnooftickets;
 @Column(name="date",length=25)
 	private Date date;
 @Column(name="bookingcount",length=25)
@@ -55,12 +55,14 @@ public void setMoviename(String moviename) {
 	this.moviename = moviename;
 }
 
-public int getNooftickets() {
-	return nooftickets;
+
+
+public int getTotalnooftickets() {
+	return totalnooftickets;
 }
 
-public void setNooftickets(int nooftickets) {
-	this.nooftickets = nooftickets;
+public void setTotalnooftickets(int totalnooftickets) {
+	this.totalnooftickets = totalnooftickets;
 }
 
 public Date getDate() {

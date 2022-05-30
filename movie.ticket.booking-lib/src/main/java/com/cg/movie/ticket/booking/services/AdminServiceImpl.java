@@ -12,16 +12,17 @@ import com.cg.movie.ticket.booking.entities.Theatre;
 import com.cg.movie.ticket.booking.entities.Users;
 import com.cg.movie.ticket.booking.repository.ShowInformationRepository;
 import com.cg.movie.ticket.booking.repository.TheatreRepository;
-import com.cg.movie.ticket.booking.repository.UserRepository;
+
+import com.cg.movie.ticket.booking.repository.UsersRepository;
 
 
 
    @Service
-    public class adminServiceImpl implements adminService{
+    public class AdminServiceImpl implements AdminService{
     @Autowired
     ShowInformationRepository showrepo;
     @Autowired
-    UserRepository userrepo;
+    UsersRepository userrepo;
     @Autowired
     TheatreRepository theatrerepo;
     
@@ -32,7 +33,7 @@ import com.cg.movie.ticket.booking.repository.UserRepository;
 		    admin.setTheatreid(t1);
 		    admin.setMoviename(showdto.getMoviename());
 		    admin.setDate(showdto.getDate());
-		    admin.setNooftickets(showdto.getNooftickets());
+		    admin.setTotalnooftickets(showdto.getTotalnooftickets());
 		    admin.setBookingcount(showdto.getBookingcount());
 		    showrepo.save(admin);
 			return admin.getShowid();	    
@@ -41,7 +42,7 @@ import com.cg.movie.ticket.booking.repository.UserRepository;
 	@Override
 	public int registerUser(UserDto userdto) {
 		 Users admin = new Users();
-		 admin.setUserid(userdto.getUserid());
+		 
 		 admin.setMobilenumber(userdto.getMobilenumber());
 		 admin.setEmail(userdto.getEmail());
 		 admin.setPassword(userdto.getPassword());

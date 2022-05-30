@@ -4,9 +4,14 @@ public class UserDto{
 	private String username;
 	private String password;
 	private String email;
-    private double mobilenumber;
-    private String Role;
-	private int userid;
+	private String role;
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	private double mobilenumber;
 	public String getUsername() {
 		return username;
 	}
@@ -31,23 +36,10 @@ public class UserDto{
 	public void setMobilenumber(double mobilenumber) {
 		this.mobilenumber = mobilenumber;
 	}
-	
-	public String getRole() {
-		return Role;
-	}
-	public void setRole(String role) {
-		Role = role;
-	}
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 	@Override
 	public String toString() {
-		return "UserDto [username=" + username + ", password=" + password + ", email=" + email + ", mobilenumber="
-				+ mobilenumber + ", Role=" + Role + ", userid=" + userid + "]";
+		return "UserDto [username=" + username + ", password=" + password + ", email=" + email + ", role=" + role
+				+ ", mobilenumber=" + mobilenumber + "]";
 	}
 	
 }

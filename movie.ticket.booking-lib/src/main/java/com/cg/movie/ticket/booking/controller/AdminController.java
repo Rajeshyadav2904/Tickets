@@ -1,10 +1,9 @@
 package com.cg.movie.ticket.booking.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,53 +14,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.movie.ticket.booking.entities.UserEntity;
-import com.cg.movie.ticket.booking.exceptions.ResourceNotFoundExecption;
-import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
-import com.cg.movie.ticket.booking.repository.UserEntityRepository;
+import com.cg.movie.ticket.booking.dto.ShowDto;
+import com.cg.movie.ticket.booking.dto.TheatreDto;
+import com.cg.movie.ticket.booking.dto.UserDto;
+import com.cg.movie.ticket.booking.entities.ShowInformation;
+import com.cg.movie.ticket.booking.services.adminServiceImpl;
 
 @RestController
-@RequestMapping("/users")
-public class AdminController {
-@Autowired
-private UserEntityRepository repository;
-
-@GetMapping("/admin")
-public List<UserEntity> getAllusers(){
-	return repository.findAll();	
+@RequestMapping("/admin")
+public class adminController{
+  @Autowired
+  adminServiceImpl adminservice;
+ 
+  @PostMapping()
+  public ResponseEntity<String> registerUser(@RequestBody UserDto userdto){
+	  int user = adminservice.registerUser(userdto);
+	  return new ResponseEntity<String>("get userid ="+user, HttpStatus.OK);
+  }
+  @PostMapping("/admin")
+ 	public ResponseEntity<String> addMovies(@RequestBody ShowDto showdto){
+ 		int showid = adminservice.addMovies(showdto);
+ 		return new ResponseEntity<String>("inserted movie = "+showid,HttpStatus.OK);
+ 	}
+  @PostMapping("/admin/{theatre}")
+  public ResponseEntity<String> addTheatre(@RequestBody TheatreDto theatredto){
+		int theatreid = adminservice.addTheatre(theatredto);
+		return new ResponseEntity<String>("inserted theatre = "+theatreid,HttpStatus.OK);
+  
+  }
+  @GetMapping("/movie/{show}")
+	public ResponseEntity<List<ShowInformation>> getShowDetails(){
+		List<ShowInformation> adminList = adminservice.viewAllMovies();
+		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
-@PostMapping("/admin/{id}")
-public 	UserEntity addUsers(@RequestBody UserEntity data) {
-	return repository.save(data);	
-	
+	@GetMapping("/movie/{booking}")
+	public ResponseEntity<List<ShowInformation>> getAllBookingCount(){
+		List<ShowInformation> adminList = adminservice.viewBookingCounts();
+		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
+	}
+  @GetMapping("/movie")
+	public ResponseEntity<List<ShowInformation>> getAllMovies(){
+		List<ShowInformation> adminList = adminservice.viewAllMovies();
+		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
-@GetMapping("/admin/{id}")
-public ResponseEntity<UserEntity> getUser(@PathVariable(value="id") Integer id)throws ResourceNotFoundExecption
-{
-	UserEntity user=repository.findById(id).orElseThrow(()-> new ResourceNotFoundExecption("user not found"));
-	return ResponseEntity.ok().body(user);
-
+  @PutMapping("/movie/{edit}")
+	public ResponseEntity<String> editMovies(@RequestBody ShowInformation admin){
+		adminservice.updateMovies(admin);
+		return new ResponseEntity<String>("updated",HttpStatus.OK);
+	}
+  @DeleteMapping("/movie/{delete}")
+	public ResponseEntity<String> deleteMovies(@PathVariable int showid){
+		adminservice.deleteMovies(showid);
+		return new ResponseEntity<String>("deleted",HttpStatus.OK);
+  }
 }
-@PutMapping("/admin/{id}")
-public ResponseEntity<UserEntity> editUser(@PathVariable(value="id") Integer id)throws ResourceNotFoundExecption
-{
-	UserEntity user1=repository.findById(id).orElseThrow(()-> new ResourceNotFoundExecption("user not found"));
-	user1.setEmail(user1.getEmail());
-	user1.setMobilenumber(user1.getMobilenumber());
-	user1.setPassword(user1.getPassword());
-	user1.setRole(user1.getRole());
-	final UserEntity updateuser = repository.save(user1);
-	return ResponseEntity.ok().body(updateuser);
-}
-@DeleteMapping("/admin/{id}")
-public Map<String,Boolean> deleteUser(@PathVariable(value="id")Integer id) throws UserNotFoundException
-{
-	UserEntity user1=repository.findById(id).orElseThrow(()-> new UserNotFoundException("User not found ....."));
-	repository.delete(user1);
-	
-	Map<String,Boolean> response = new HashMap<>();
-	response.put("deleted", Boolean.TRUE);
-	return response;
-}
-}
-

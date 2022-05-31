@@ -14,6 +14,11 @@ import com.cg.movie.ticket.booking.entities.BookTicket;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.entities.Theatre;
 import com.cg.movie.ticket.booking.entities.Users;
+import com.cg.movie.ticket.booking.exceptions.InvalidBookingIdException;
+import com.cg.movie.ticket.booking.exceptions.MovieNotFoundExceptions;
+import com.cg.movie.ticket.booking.exceptions.ShowNotFoundExceptions;
+import com.cg.movie.ticket.booking.exceptions.TheraterNotFoundException;
+import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
 import com.cg.movie.ticket.booking.repository.BookTicketRepository;
 import com.cg.movie.ticket.booking.repository.ShowInformationRepository;
 import com.cg.movie.ticket.booking.repository.TheatreRepository;
@@ -33,12 +38,16 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public List<ShowInformation> searchShowByLocation(String location) {
 			Theatre tet= tetrepo.getTetByLoc(location);
+			if(tet.equals(null))
+				throw new TheraterNotFoundException();
 			List<ShowInformation> show=showrepo.getShowByTetId(tet.getTheatreid());
 			return show;
 		}
 		@Override
 		public List<ShowInformation> searchShowByTheaterName(String theatrename) {
 			Theatre tet= tetrepo.getTetByName(theatrename);
+			if(tet==null)
+				throw new TheraterNotFoundException();
 			List<ShowInformation> show=showrepo.getShowByTetId(tet.getTheatreid());
 			
 			return show;
@@ -46,16 +55,23 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public List<ShowInformation> searchShowByMoviename(String moviename) {
 			List<ShowInformation> show=showrepo.getShowByMovie(moviename);
+			if(show.isEmpty())
+				throw new MovieNotFoundExceptions();
 			return show;
 		}
 		@Override
 		public List<ShowInformation> searchShowByDate(Date date) {
 			List<ShowInformation> show=showrepo.getShowByTimings(date);
+			if(show.isEmpty())
+				throw new ShowNotFoundExceptions();
 			return show;
 		}
 		@Override
 		public ViewTicketDto viewBookedTickets(int bookingid) {
 			BookTicket book=bookrepo.getById(bookingid);
+			if(book.equals(null))
+				throw new InvalidBookingIdException();
+			
 			ViewTicketDto vd=new ViewTicketDto();
 			vd.setUserid(bookrepo.getIdById(bookingid));
 			vd.setUsername(userepo.getNameById(bookrepo.getIdById(bookingid)));
@@ -86,9 +102,12 @@ public class UserServiceImpl implements UserService {
 				Users user=userepo.getId(userid);
 			System.out.println("user logged in");
 			}
-			else
+			else {
 				System.out.println("user password not matched");
-			}
+				}}
+			else
+				throw new UserNotFoundException();
+			
 	return null;
 		}
 		@Override
@@ -106,6 +125,7 @@ public class UserServiceImpl implements UserService {
 			return book.getBookingid();
 		}
 		else {
+			
 			int x=show.getTotalnooftickets()-show.getBookingcount();
 			System.out.println(" only tickets avaiable are  "+""+x);
 		
@@ -113,7 +133,9 @@ public class UserServiceImpl implements UserService {
 		}}
 		@Override
 		public void cancelTickets(int bookingid) {
-			// TODO Auto-generated method stub
+			if(bookrepo.getById(bookingid)==null)
+				throw new InvalidBookingIdException();
+			
 			userepo.deleteById(bookingid);
 			
 		}

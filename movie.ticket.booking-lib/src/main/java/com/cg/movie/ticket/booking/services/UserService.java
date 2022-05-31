@@ -7,18 +7,23 @@ import com.cg.movie.ticket.booking.dto.BookDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.dto.ViewTicketDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
+import com.cg.movie.ticket.booking.exceptions.InvalidBookingIdException;
+import com.cg.movie.ticket.booking.exceptions.MovieNotFoundExceptions;
+import com.cg.movie.ticket.booking.exceptions.ShowNotFoundExceptions;
+import com.cg.movie.ticket.booking.exceptions.TheraterNotFoundException;
+import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
 
 public interface UserService {
 int registrationUser(UserDto userdto);
 	
-	List<ShowInformation> searchShowByLocation(String location);
+	List<ShowInformation> searchShowByLocation(String location)throws TheraterNotFoundException ;
 	
-	List<ShowInformation> searchShowByTheaterName(String theatrename);
-	List<ShowInformation> searchShowByMoviename(String moviename);
-	List<ShowInformation> searchShowByDate(Date date);
-	String login(int userid,String password);
-	ViewTicketDto viewBookedTickets(int bookingid);
-	int  bookingTickets(BookDto bookdto);
-	void cancelTickets(int bookingid);
+	List<ShowInformation> searchShowByTheaterName(String theatrename)throws TheraterNotFoundException ;
+	List<ShowInformation> searchShowByMoviename(String moviename)throws MovieNotFoundExceptions;
+	List<ShowInformation> searchShowByDate(Date date)throws ShowNotFoundExceptions ;
+	String login(int userid,String password)throws UserNotFoundException;
+	ViewTicketDto viewBookedTickets(int bookingid)throws InvalidBookingIdException;
+	int  bookingTickets(BookDto bookdto)throws InvalidBookingIdException;
+	void cancelTickets(int bookingid)throws InvalidBookingIdException;
 
 }

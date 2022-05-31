@@ -21,8 +21,7 @@ private String theatrename;
 @Column(name="location",length=25)
 private String location;
 
-@Column(name="totaltickets",length=25)
-private int totaltickets;
+
 public int getTheatreid() {
 	return theatreid;
 }
@@ -42,11 +41,5 @@ public void setLocation(String location) {
 	this.location = location;
 }
 
-public int getTotaltickets() {
-	return totaltickets;
-}
-public void setTotaltickets(int totaltickets) {
-	this.totaltickets = totaltickets;
-}
 
 }

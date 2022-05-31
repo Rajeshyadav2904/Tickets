@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ShowInformation")
 public class ShowInformation {
-@Id@SequenceGenerator(name = "show_seq",initialValue=92022,sequenceName="show_code_seq",allocationSize=2)
+@Id@SequenceGenerator(name = "show_seq",initialValue=92022,sequenceName="show_code_seq",allocationSize=1)
 @GeneratedValue(generator="show_seq",strategy = GenerationType.SEQUENCE)
 	private int showid;
 @Column(name="moviename",length=25)

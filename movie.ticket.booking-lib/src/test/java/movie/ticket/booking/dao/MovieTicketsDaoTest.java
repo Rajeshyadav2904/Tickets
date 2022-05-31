@@ -1,12 +1,14 @@
 package movie.ticket.booking.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.movie.ticket.booking.entities.BookTicket;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
@@ -16,6 +18,7 @@ import com.cg.movie.ticket.booking.repository.ShowInformationRepository;
 import com.cg.movie.ticket.booking.repository.TheatreRepository;
 import com.cg.movie.ticket.booking.repository.UsersRepository;
 
+@SpringBootTest
 public class MovieTicketsDaoTest {
 	@Autowired
 	UsersRepository userepo;
@@ -50,5 +53,25 @@ public void TestgetById() {
 	System.out.println(book.getBookingid());
 	assertEquals(book.getBookingid(),2);
 }
-
+@Test
+public void testGetAllMoviesNotNull() {
+	List<ShowInformation> showlist = showrepo.findAll();
+	assertNotNull(showlist);
+}
+@Test
+public void testGetAllShowInformationNotNull() {
+	List<ShowInformation> showlist = showrepo.findAll();
+	assertNotNull(showlist);
+}
+@Test
+public void testDeleteAllMoviesNull() {
+	List<ShowInformation> showlist = showrepo.findAll();
+	assertNotNull(showlist);
+}
+@Test
+public void testGetShowById() {
+	ShowInformation dept = showrepo.getById(44444);
+	System.out.println(dept.getTheatreid());
+	assertEquals(dept.getTheatreid(),333);
+}
 }

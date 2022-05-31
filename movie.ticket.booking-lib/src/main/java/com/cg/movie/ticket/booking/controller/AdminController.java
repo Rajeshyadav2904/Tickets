@@ -57,12 +57,12 @@ public class AdminController{
 		List<ShowInformation> adminList = adminservice.viewAllMovies();
 		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
-  @PutMapping("/movie/{edit}")
+  @PutMapping("/movie")
 	public ResponseEntity<String> editMovies(@RequestBody ShowInformation admin){
 		adminservice.updateMovies(admin);
 		return new ResponseEntity<String>("updated",HttpStatus.OK);
 	}
-  @DeleteMapping("/movie/{delete}")
+  @DeleteMapping("/movie{showid}")
 	public ResponseEntity<String> deleteMovies(@PathVariable int showid){
 		adminservice.deleteMovies(showid);
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);

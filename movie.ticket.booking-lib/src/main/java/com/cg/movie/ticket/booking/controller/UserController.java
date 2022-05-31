@@ -76,7 +76,7 @@ public class UserController {
 		return new  ResponseEntity<ViewTicketDto>(vd,HttpStatus.OK);
 		
 	}
-	@DeleteMapping
+	@DeleteMapping("/delete/{bookingid}")
 	public ResponseEntity<String> cancelTicket(@PathVariable int bookingid){
 		service.cancelTickets(bookingid);
 		return new  ResponseEntity<String>("deleted",HttpStatus.OK);

@@ -27,7 +27,7 @@ public class MovieExecptionHandler {
 	}
 	@ExceptionHandler(value=MovieNotFoundExceptions.class)
 	public ResponseEntity<Object> exception(MovieNotFoundExceptions exception){
-	return new ResponseEntity<Object>("show not found....", HttpStatus.NOT_FOUND);
+	return new ResponseEntity<Object>("movie not found....", HttpStatus.NOT_FOUND);
 	}
 	
 }

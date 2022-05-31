@@ -8,6 +8,8 @@ public class ShowDto {
 	private int totalnooftickets;
 	private int bookingcount;
 	private int theatreid;
+	private int showid;
+	
 	public String getMoviename() {
 		return moviename;
 	}
@@ -38,11 +40,19 @@ public class ShowDto {
 	public void setTheatreid(int theatreid) {
 		this.theatreid = theatreid;
 	}
+	public int getShowid() {
+		return showid;
+	}
+	public void setShowid(int showid) {
+		this.showid = showid;
+	}
 	@Override
 	public String toString() {
 		return "ShowDto [moviename=" + moviename + ", date=" + date + ", totalnooftickets=" + totalnooftickets
-				+ ", bookingcount=" + bookingcount + ", theatreid=" + theatreid + "]";
+				+ ", bookingcount=" + bookingcount + ", theatreid=" + theatreid + ", showid=" + showid + "]";
 	}
+	
+	
 	
   
    

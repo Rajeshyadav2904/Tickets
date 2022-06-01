@@ -5,13 +5,14 @@ public class UserDto{
 	private String password;
 	private String email;
 	private String role;
+
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
-	private double mobilenumber;
+	private long mobilenumber;
 	public String getUsername() {
 		return username;
 	}
@@ -30,10 +31,10 @@ public class UserDto{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public double getMobilenumber() {
+	public long getMobilenumber() {
 		return mobilenumber;
 	}
-	public void setMobilenumber(double mobilenumber) {
+	public void setMobilenumber(long mobilenumber) {
 		this.mobilenumber = mobilenumber;
 	}
 	@Override

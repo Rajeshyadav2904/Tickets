@@ -24,13 +24,13 @@ private String password;
 @Column(name="email",length=25)
 private String email;
 @Column(name="mobilenumber",length=25)
-private double mobilenumber;
+private long mobilenumber;
 
 @Column(name="role",length=25)
 private String role;
 
 public int getUserid() {
-	return userid;
+	return  userid;
 }
 public void setUserid(int userid) {
 	this.userid = userid;
@@ -53,10 +53,10 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
-public double getMobilenumber() {
+public long getMobilenumber() {
 	return mobilenumber;
 }
-public void setMobilenumber(double mobilenumber) {
+public void setMobilenumber(long mobilenumber) {
 	this.mobilenumber = mobilenumber;
 }
 public String getRole() {

@@ -68,10 +68,5 @@ public void testDeleteAllMoviesNull() {
 	List<ShowInformation> showlist = showrepo.findAll();
 	assertNotNull(showlist);
 }
-@Test
-public void testGetShowById() {
-	ShowInformation dept = showrepo.getById(44444);
-	System.out.println(dept.getTheatreid());
-	assertEquals(dept.getTheatreid(),333);
-}
+
 }

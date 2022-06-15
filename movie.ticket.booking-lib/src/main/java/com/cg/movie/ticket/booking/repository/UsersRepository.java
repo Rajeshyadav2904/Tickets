@@ -12,4 +12,5 @@ public interface UsersRepository extends JpaRepository<Users, Integer>{
 	Users getId(int userid);
 	@Query(value="select user.username from Users user where user.userid=?1")
 	public String getNameById(int userid );
+	
 }

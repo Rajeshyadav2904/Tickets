@@ -12,6 +12,7 @@ import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.entities.Theatre;
 import com.cg.movie.ticket.booking.entities.Users;
 import com.cg.movie.ticket.booking.exceptions.ShowNotFoundExceptions;
+import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
 import com.cg.movie.ticket.booking.repository.ShowInformationRepository;
 import com.cg.movie.ticket.booking.repository.TheatreRepository;
 import com.cg.movie.ticket.booking.repository.UsersRepository;
@@ -19,11 +20,11 @@ import com.cg.movie.ticket.booking.repository.UsersRepository;
 @Service
 public class ShowInchargeServiceImpl implements ShowInchargeService{
 	@Autowired
-	ShowInformationRepository showrepo;
+	private ShowInformationRepository showrepo;
 	@Autowired
-	UsersRepository userrepo;
+	private UsersRepository userrepo;
 	@Autowired
-	TheatreRepository theatrerepo;
+	private TheatreRepository theatrerepo;
 	
 	@Override
 	public int registerShowIncharge(UserDto s) {
@@ -38,15 +39,33 @@ public class ShowInchargeServiceImpl implements ShowInchargeService{
 	
 	@Override
 	public int addShowTimings(ShowDto showdto) {
-		Theatre t1 = theatrerepo.getTheaterById(showdto.getTheatreid());
+		Theatre tet = theatrerepo.getTetById(showdto.getTheatreid());
 	    ShowInformation admin = new ShowInformation();
-	    admin.setTheatreid(t1);
+	    admin.setTet(tet);;
 	    admin.setMoviename(showdto.getMoviename());
 	    admin.setDate(showdto.getDate());
 	    admin.setTotalnooftickets(showdto.getTotalnooftickets());
 	    admin.setBookingcount(showdto.getBookingcount());
 	    showrepo.save(admin);
 		return admin.getShowid();
+	}
+	@Override
+	public String login(int userid, String password) {
+		
+	if(userrepo.existsById(userid)) {
+
+		
+		if(userrepo.getByPassword(userid).equals(password)) {
+			userrepo.getId(userid);
+		System.out.println("user logged in");
+		}
+		else {
+			System.out.println("user password not matched");
+			}}
+		else
+			throw new UserNotFoundException();
+		
+return null;
 	}
 
 	@Override
@@ -70,7 +89,7 @@ public class ShowInchargeServiceImpl implements ShowInchargeService{
 	@Override 
 	public Optional<ShowInformation> getShowById(int showid) {
 		Optional<ShowInformation> show = showrepo.findById(showid); 
-		if(show.equals(null))
+		if(show==null)
 			throw new ShowNotFoundExceptions();
 		return show;
 	}

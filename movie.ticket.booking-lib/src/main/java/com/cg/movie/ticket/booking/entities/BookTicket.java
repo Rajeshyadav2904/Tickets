@@ -23,35 +23,42 @@ private int noofticketsbooked;
 
 @OneToOne
 @JoinColumn(name = "userid")
-private Users userid;
+private Users user;
 
 @OneToOne
 @JoinColumn(name = "showid")
-private ShowInformation showid;
+private ShowInformation show;
 
-public ShowInformation getShowid() {
-	return showid;
-}
-public void setShowid(ShowInformation showid) {
-	this.showid = showid;
-}
 public int getBookingid() {
 	return bookingid;
 }
+
 public void setBookingid(int bookingid) {
 	this.bookingid = bookingid;
 }
+
 public int getNoofticketsbooked() {
 	return noofticketsbooked;
 }
+
 public void setNoofticketsbooked(int noofticketsbooked) {
 	this.noofticketsbooked = noofticketsbooked;
 }
-public Users getUserid() {
-	return userid;
-}
-public void setUserid(Users userid) {
-	this.userid = userid;
+
+public Users getUser() {
+	return user;
 }
 
+public void setUser(Users user) {
+	this.user = user;
 }
+
+public ShowInformation getShow() {
+	return show;
+}
+
+public void setShow(ShowInformation show) {
+	this.show = show;
+}
+}
+

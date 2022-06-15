@@ -37,7 +37,7 @@ public void setBookingcount(int bookingcount) {
 
 @OneToOne
 @JoinColumn(name = "theatreid")
-	private Theatre theatreid;
+	private Theatre tet;
 
 public int getShowid() {
 	return showid;
@@ -73,13 +73,15 @@ public void setDate(Date date) {
 	this.date = date;
 }
 
-public Theatre getTheatreid() {
-	return theatreid;
+public Theatre getTet() {
+	return tet;
 }
 
-public void setTheatreid(Theatre theatreid) {
-	this.theatreid = theatreid;
+public void setTet(Theatre tet) {
+	this.tet = tet;
 }
+
+
 }
 
 

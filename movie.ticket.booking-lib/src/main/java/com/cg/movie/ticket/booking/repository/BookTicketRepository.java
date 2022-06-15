@@ -5,14 +5,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cg.movie.ticket.booking.entities.BookTicket;
+import com.cg.movie.ticket.booking.entities.ShowInformation;
+import com.cg.movie.ticket.booking.entities.Users;
 @Repository
 public interface BookTicketRepository extends JpaRepository<BookTicket, Integer>{
-	@Query(value="select book from BookTicket book where book.bookingid=?1")
-	BookTicket getBookById(int bookingid);
-	@Query(value="select book.userid from BookTicket book where book.bookingid=?1")
-	public int getIdById(int bookingid );
-	@Query(value="select book.showid from BookTicket book where book.bookingid=?1")
-	public int getSById(int bookingid );
+	@Query(value = "select book.user from BookTicket book where book.bookingid=?1")
+	Users getUseById(int bookingid );
+	@Query(value = "select book.show from BookTicket book where book.bookingid=?1")
+	ShowInformation getshowById(int bookingid );
+	
 	
 	
 }

@@ -10,6 +10,7 @@ import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.entities.Theatre;
 import com.cg.movie.ticket.booking.entities.Users;
+import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
 import com.cg.movie.ticket.booking.repository.ShowInformationRepository;
 import com.cg.movie.ticket.booking.repository.TheatreRepository;
 
@@ -17,20 +18,20 @@ import com.cg.movie.ticket.booking.repository.UsersRepository;
 
 
 
-   @Service
-    public class AdminServiceImpl implements AdminService{
+@Service
+public class AdminServiceImpl implements AdminService{
     @Autowired
-    ShowInformationRepository showrepo;
+   private ShowInformationRepository showrepo;
     @Autowired
-    UsersRepository userrepo;
+   private UsersRepository userrepo;
     @Autowired
-    TheatreRepository theatrerepo;
+   private TheatreRepository theatrerepo;
     
 	@Override
 	public int addMovies(ShowDto showdto) {  
-		    Theatre t1 = theatrerepo.getTheaterById(showdto.getTheatreid());
+		    Theatre tet = theatrerepo.getTetById(showdto.getTheatreid());
 		    ShowInformation admin = new ShowInformation();
-		    admin.setTheatreid(t1);
+		    admin.setTet(tet);
 		    admin.setMoviename(showdto.getMoviename());
 		    admin.setDate(showdto.getDate());
 		    admin.setTotalnooftickets(showdto.getTotalnooftickets());
@@ -38,6 +39,24 @@ import com.cg.movie.ticket.booking.repository.UsersRepository;
 		    showrepo.save(admin);
 			return admin.getShowid();	    
    }
+	@Override
+	public String login(int userid, String password) {
+		
+	if(userrepo.existsById(userid)) {
+
+		
+		if(userrepo.getByPassword(userid).equals(password)) {
+			userrepo.getId(userid);
+		System.out.println("user logged in");
+		}
+		else {
+			System.out.println("user password not matched");
+			}}
+		else
+			throw new UserNotFoundException();
+		
+return null;
+	}
 	
 	@Override
 	public int registerUser(UserDto userdto) {
@@ -80,11 +99,11 @@ import com.cg.movie.ticket.booking.repository.UsersRepository;
 
 	@Override
 	public int addTheatre(TheatreDto theatredto) {
-		Theatre t1= new Theatre();
-		t1.setTheatrename(theatredto.getTheatrename());
-		t1.setLocation(theatredto.getLocation());
-		theatrerepo.save(t1);
-		return t1.getTheatreid();
+		Theatre tet= new Theatre();
+		tet.setTheatrename(theatredto.getTheatrename());
+		tet.setLocation(theatredto.getLocation());
+		theatrerepo.save(tet);
+		return tet.getTheatreid();
 	}
 	
 	}	

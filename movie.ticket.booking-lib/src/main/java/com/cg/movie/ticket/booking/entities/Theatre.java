@@ -16,6 +16,7 @@ public class Theatre {
 @SequenceGenerator(name = "thearter_seq",initialValue=602022,sequenceName="thearter_code_seq",allocationSize=2)
 @GeneratedValue(generator="thearter_seq",strategy = GenerationType.SEQUENCE)
 private int theatreid;
+
 @Column(name="theatrename",length=25)
 private String theatrename;
 @Column(name="location",length=25)
@@ -39,6 +40,10 @@ public String getLocation() {
 }
 public void setLocation(String location) {
 	this.location = location;
+}
+@Override
+public String toString() {
+	return "Theatre [theatreid=" + theatreid + ", theatrename=" + theatrename + ", location=" + location + "]";
 }
 
 

@@ -26,31 +26,33 @@ import com.cg.movie.ticket.booking.repository.UsersRepository;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UsersRepository userepo;
+	private UsersRepository userepo;
 	@Autowired
-	TheatreRepository tetrepo;
+	private TheatreRepository tetrepo;
 	@Autowired
-	ShowInformationRepository showrepo;
+	private ShowInformationRepository showrepo;
 	@Autowired
-	BookTicketRepository bookrepo;
+	private BookTicketRepository bookrepo;
 
 
 		@Override
 		public List<ShowInformation> searchShowByLocation(String location) {
 			Theatre tet= tetrepo.getTetByLoc(location);
-			if(tet.equals(null))
+			if(tet==null)
 				throw new TheraterNotFoundException();
-			List<ShowInformation> show=showrepo.getShowByTetId(tet.getTheatreid());
-			return show;
+			
+			return showrepo.getshowByTetId(tet.getTheatreid());
+		
 		}
 		@Override
 		public List<ShowInformation> searchShowByTheaterName(String theatrename) {
 			Theatre tet= tetrepo.getTetByName(theatrename);
 			if(tet==null)
 				throw new TheraterNotFoundException();
-			List<ShowInformation> show=showrepo.getShowByTetId(tet.getTheatreid());
 			
-			return show;
+		return showrepo.getshowByTetId(tet.getTheatreid());
+			
+		
 		}
 		@Override
 		public List<ShowInformation> searchShowByMoviename(String moviename) {
@@ -69,16 +71,19 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public ViewTicketDto viewBookedTickets(int bookingid) {
 			BookTicket book=bookrepo.getById(bookingid);
-			if(book.equals(null))
+			Users user=bookrepo.getUseById(bookingid);
+			ShowInformation show=bookrepo.getshowById(bookingid);
+			Theatre tet =show.getTet();
+			if(book==null)
 				throw new InvalidBookingIdException();
 			
 			ViewTicketDto vd=new ViewTicketDto();
-			vd.setUserid(bookrepo.getIdById(bookingid));
-			vd.setUsername(userepo.getNameById(bookrepo.getIdById(bookingid)));
-			vd.setMoviename(showrepo.getNameId(bookrepo.getSById(bookingid)));
+	        vd.setUserid(user.getUserid());
+	        vd.setUsername(user.getUsername());
+	        vd.setMoviename(show.getMoviename());
 			vd.setNoofticketsbooked(book.getNoofticketsbooked());
-			vd.setTheatrename(tetrepo.getNameById(showrepo.getSId(bookrepo.getSById(bookingid))));
-			vd.setLocation(tetrepo.getLocById(showrepo.getSId(bookrepo.getSById(bookingid))));
+			vd.setTheatrename(tet.getTheatrename());
+			vd.setLocation(tet.getLocation());
 			
 			return vd;
 		}
@@ -100,7 +105,7 @@ public class UserServiceImpl implements UserService {
 
 			
 			if(userepo.getByPassword(userid).equals(password)) {
-				Users user=userepo.getId(userid);
+				userepo.getId(userid);
 			System.out.println("user logged in");
 			}
 			else {
@@ -116,13 +121,16 @@ public class UserServiceImpl implements UserService {
 			
 			
 			ShowInformation show=showrepo.getShowById(bookdto.getShowid());
-			Users user=userepo.getById(bookdto.getUserid());
+		Users user=userepo.getById(bookdto.getUserid());
 		
 			if(bookdto.getNoofticketsbooked()<=(show.getTotalnooftickets()-show.getBookingcount())) {
 			BookTicket book=new BookTicket();
 			book.setNoofticketsbooked(bookdto.getNoofticketsbooked());
+			book.setShow(show);
+			book.setUser(user);
 			bookrepo.save(book);
-			show.setBookingcount(show.getBookingcount()+book.getBookingid());
+			show.setBookingcount(show.getBookingcount()+book.getNoofticketsbooked());
+			showrepo.save(show);
 			return book.getBookingid();
 		}
 		else {

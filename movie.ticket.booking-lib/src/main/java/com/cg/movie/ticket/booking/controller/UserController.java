@@ -24,61 +24,61 @@ import com.cg.movie.ticket.booking.services.UserServiceImpl;
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
-	UserServiceImpl service;
+	private UserServiceImpl userservice;
 
 	@PostMapping
 	public ResponseEntity<String> registrationUser(@RequestBody UserDto userdto){
-		int userid = service.registrationUser(userdto);
+		int userid = userservice.registrationUser(userdto);
 		return new ResponseEntity<String>("inserted userid="+userid,HttpStatus.OK);
 		
 	}
 	@GetMapping("/location/{location}")
-	public ResponseEntity<List<ShowInformation>> search(@PathVariable String location)
+	public ResponseEntity<List<ShowInformation>> searchShowByLocation(@PathVariable String location)
 	{
-		List<ShowInformation> showlist=service.searchShowByLocation(location);
+		List<ShowInformation> showlist=userservice.searchShowByLocation(location);
 		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
 	}
 	@GetMapping("/moviename/{moviename}")
-	public ResponseEntity<List<ShowInformation>> search1(@PathVariable String moviename)
+	public ResponseEntity<List<ShowInformation>> searchShowByMoviename(@PathVariable String moviename)
 	{
-		List<ShowInformation> showlist=service.searchShowByMoviename(moviename);
+		List<ShowInformation> showlist=userservice.searchShowByMoviename(moviename);
 		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
 	}
 	@GetMapping("/theatrename/{theatrename}")
-	public ResponseEntity<List<ShowInformation>> search2(@PathVariable String theatrename)
+	public ResponseEntity<List<ShowInformation>> searchShowByTheaterName(@PathVariable String theatrename)
 	{
-		List<ShowInformation> showlist=service.searchShowByTheaterName(theatrename);
+		List<ShowInformation> showlist=userservice.searchShowByTheaterName(theatrename);
 		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
 	}
 	@GetMapping("/date/{date}")
-	public ResponseEntity<List<ShowInformation>> search3(@PathVariable Date date)
+	public ResponseEntity<List<ShowInformation>> searchShowByDate(@PathVariable Date date)
 	{
-		List<ShowInformation> showlist=service.searchShowByDate(date);
+		List<ShowInformation> showlist=userservice.searchShowByDate(date);
 		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
 	}
 	@GetMapping("/login/{userid}/{password}")
 	public String login(@PathVariable int  userid,@PathVariable String password){
-	return	service.login(userid, password);
+	return	userservice.login(userid, password);
 	}
 	@PostMapping("/booking/")
 	public ResponseEntity<String> booking(@RequestBody BookDto bookdto){
-		int bookingid=service.bookingTickets(bookdto);
+		int bookingid=userservice.bookingTickets(bookdto);
 		return new ResponseEntity<String>("booked bookingid= "+bookingid,HttpStatus.OK);
 		
 	}
 	@GetMapping("/viewticket/{bookingid}")
 	public ResponseEntity<ViewTicketDto> viewTicket(@PathVariable int bookingid){
-		ViewTicketDto vd =service.viewBookedTickets(bookingid);
+		ViewTicketDto vd =userservice.viewBookedTickets(bookingid);
 		return new  ResponseEntity<ViewTicketDto>(vd,HttpStatus.OK);
 		
 	}
 	@DeleteMapping("/delete/{bookingid}")
 	public ResponseEntity<String> cancelTicket(@PathVariable int bookingid){
-		service.cancelTickets(bookingid);
+		userservice.cancelTickets(bookingid);
 		return new  ResponseEntity<String>("deleted",HttpStatus.OK);
 		
 	}

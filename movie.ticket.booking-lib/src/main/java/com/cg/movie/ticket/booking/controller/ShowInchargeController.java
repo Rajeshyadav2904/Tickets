@@ -19,6 +19,7 @@ import com.cg.movie.ticket.booking.dto.ShowDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.services.ShowInchargeServiceImpl;
+import com.cg.movie.ticket.booking.services.UserServiceImpl;
 
 
 @RestController
@@ -27,6 +28,10 @@ public class ShowInchargeController {
 	@Autowired
 	private ShowInchargeServiceImpl showservice;
 	
+	@GetMapping("/login/{userid}/{password}")
+	public String login(@PathVariable int  userid,@PathVariable String password){
+	return	showservice.login(userid, password);
+	}
 	@PostMapping
 	public ResponseEntity<String> registerShowIncharge(@RequestBody UserDto s){
 		int userid = showservice.registerShowIncharge(s);

@@ -24,8 +24,12 @@ import com.cg.movie.ticket.booking.services.AdminServiceImpl;
 @RequestMapping("/admin")
 public class AdminController{
   @Autowired
-  AdminServiceImpl adminservice;
+  private AdminServiceImpl adminservice;
  
+  @GetMapping("/login/{userid}/{password}")
+	public String login(@PathVariable int  userid,@PathVariable String password){
+	return	adminservice.login(userid, password);
+	}
   @PostMapping()
   public ResponseEntity<String> registerUser(@RequestBody UserDto userdto){
 	  int user = adminservice.registerUser(userdto);

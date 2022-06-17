@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,7 @@ public class ShowInchargeController {
 	
 
 	@PostMapping("/add")
-	public ResponseEntity<String> addShowTimings(@RequestBody ShowDto showdto){
+	public ResponseEntity<String> addShow(@RequestBody ShowDto showdto){
 	int incharge = showservice.addShowTimings(showdto);
 	return new ResponseEntity<String>("get show timings ="+incharge, HttpStatus.OK);
 	}
@@ -52,14 +53,14 @@ public class ShowInchargeController {
 		return new ResponseEntity<List<ShowInformation>>(showList,HttpStatus.OK);
 	}
 	
-	@PatchMapping("/update")
-	public ResponseEntity<String> updateShowTimings(@RequestBody ShowDto show){
+	@PutMapping("/update")
+	public ResponseEntity<String> updateShow(@RequestBody ShowDto show){
 		showservice.updateShowTimings(show);
 		return new ResponseEntity<String>("updated",HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteShowTimings(@PathVariable int showid){
+	public ResponseEntity<String> deleteShow(@PathVariable int showid){
 		showservice.deleteShowTimings(showid);
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
 	}

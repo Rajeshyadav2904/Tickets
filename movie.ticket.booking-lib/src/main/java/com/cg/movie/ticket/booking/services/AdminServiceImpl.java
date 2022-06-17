@@ -92,10 +92,7 @@ return null;
 		return showrepo.findAll();
 	}
 
-	@Override
-	public List<ShowInformation> viewBookingCounts() {
-		return showrepo.findAll();
-	  }
+	
 
 	@Override
 	public int addTheatre(TheatreDto theatredto) {

@@ -51,11 +51,7 @@ public class AdminController{
 		List<ShowInformation> adminList = adminservice.viewAllMovies();
 		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
-	@GetMapping("/movie/{booking}")
-	public ResponseEntity<List<ShowInformation>> getAllBookingCount(){
-		List<ShowInformation> adminList = adminservice.viewBookingCounts();
-		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
-	}
+	
   @GetMapping("/movie")
 	public ResponseEntity<List<ShowInformation>> getAllMovies(){
 		List<ShowInformation> adminList = adminservice.viewAllMovies();

@@ -18,7 +18,7 @@ public class BookTicket {
 @GeneratedValue(generator="book_seq",strategy = GenerationType.SEQUENCE)
 private int bookingid;
 
-@Column(name="noofticketsbooked",length=25)
+@Column(name="noofticketsbooked",length=300)
 private int noofticketsbooked;
 
 @OneToOne

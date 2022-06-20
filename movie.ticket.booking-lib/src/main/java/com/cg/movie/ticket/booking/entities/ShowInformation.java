@@ -18,13 +18,13 @@ public class ShowInformation {
 @Id@SequenceGenerator(name = "show_seq",initialValue=92022,sequenceName="show_code_seq",allocationSize=1)
 @GeneratedValue(generator="show_seq",strategy = GenerationType.SEQUENCE)
 	private int showid;
-@Column(name="moviename",length=25)
+@Column(name="moviename",length=300)
 	private String moviename;
-@Column(name="totalnooftickets",length=25)
+@Column(name="totalnooftickets",length=300)
 	private int totalnooftickets;
-@Column(name="date",length=25)
+@Column(name="date",length=300)
 	private Date date;
-@Column(name="bookingcount",length=25)
+@Column(name="bookingcount",length=300)
     private int bookingcount;
 
 public int getBookingcount() {

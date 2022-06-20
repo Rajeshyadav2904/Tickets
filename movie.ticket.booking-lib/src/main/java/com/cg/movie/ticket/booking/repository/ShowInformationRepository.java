@@ -7,14 +7,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
+import com.cg.movie.ticket.booking.entities.Theatre;
 
 
 @Repository
 public interface ShowInformationRepository extends JpaRepository<ShowInformation,Integer> {
 
+	
+	
 	@Query(value = "select show from ShowInformation show where tet.theatreid=?1")
-	List<ShowInformation> getshowByTetId(int theatreid);
-
+	List<ShowInformation> getshowBytetName(int  theatreid);
+	
+	
+	
 	@Query(value = "select show from ShowInformation show where show.moviename=?1")
 	List<ShowInformation> getShowByMovie(String moviename);
 

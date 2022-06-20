@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +22,14 @@ import com.cg.movie.ticket.booking.dto.ViewTicketDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.services.UserServiceImpl;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
 	private UserServiceImpl userservice;
-
+	
+    
 	@PostMapping
 	public ResponseEntity<String> registrationUser(@RequestBody UserDto userdto){
 		int userid = userservice.registrationUser(userdto);
@@ -64,7 +68,7 @@ public class UserController {
 	public String login(@PathVariable int  userid,@PathVariable String password){
 	return	userservice.login(userid, password);
 	}
-	@PostMapping("/booking/")
+	@PostMapping("/booking")
 	public ResponseEntity<String> booking(@RequestBody BookDto bookdto){
 		int bookingid=userservice.bookingTickets(bookdto);
 		return new ResponseEntity<String>("booked bookingid= "+bookingid,HttpStatus.OK);

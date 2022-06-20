@@ -30,7 +30,7 @@ public class MovieTicketsDaoTest {
 	BookTicketRepository bookrepo;
 @Test
 public void TestgetTetByLoc() {
-	Theatre tet= tetrepo.getTetByLoc("hyderabad");
+	Theatre tet= tetrepo.getTetByName("hyderabad");
 	System.out.println(tet.getLocation());
 	assertEquals(tet.getLocation(),"hyderabad");
 }

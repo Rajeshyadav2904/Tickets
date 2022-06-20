@@ -17,9 +17,9 @@ public class Theatre {
 @GeneratedValue(generator="thearter_seq",strategy = GenerationType.SEQUENCE)
 private int theatreid;
 
-@Column(name="theatrename",length=25)
+@Column(name="theatrename",length=300,unique=true)
 private String theatrename;
-@Column(name="location",length=25)
+@Column(name="location",length=300,unique=true)
 private String location;
 
 

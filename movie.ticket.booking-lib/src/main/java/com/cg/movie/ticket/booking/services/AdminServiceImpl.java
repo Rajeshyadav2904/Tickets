@@ -77,7 +77,10 @@ return null;
 
 	@Override
 	public void updateMovies(ShowInformation show) {
-		 showrepo.save(show);
+		showrepo.save(show);
+		
+		
+	
 		
 	}
 

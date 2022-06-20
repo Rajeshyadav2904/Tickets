@@ -25,6 +25,7 @@ import com.cg.movie.ticket.booking.repository.TheatreRepository;
 import com.cg.movie.ticket.booking.repository.UsersRepository;
 @Service
 public class UserServiceImpl implements UserService {
+	
 	@Autowired
 	private UsersRepository userepo;
 	@Autowired
@@ -37,26 +38,34 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public List<ShowInformation> searchShowByLocation(String location) {
-			Theatre tet= tetrepo.getTetByLoc(location);
-			if(tet==null)
-				throw new TheraterNotFoundException();
 			
-			return showrepo.getshowByTetId(tet.getTheatreid());
+			Theatre tet=tetrepo.getTetByName(location);
+			
+			if(tet==null) 
+				throw new TheraterNotFoundException();
+				
+			
+				
+			return showrepo.getshowBytetName(tet.getTheatreid());
 		
 		}
 		@Override
 		public List<ShowInformation> searchShowByTheaterName(String theatrename) {
-			Theatre tet= tetrepo.getTetByName(theatrename);
+			
+		Theatre tet	=tetrepo.getTtByName(theatrename);
+		
 			if(tet==null)
 				throw new TheraterNotFoundException();
 			
-		return showrepo.getshowByTetId(tet.getTheatreid());
+			return showrepo.getshowBytetName(tet.getTheatreid());
 			
 		
 		}
 		@Override
 		public List<ShowInformation> searchShowByMoviename(String moviename) {
+			
 			List<ShowInformation> show=showrepo.getShowByMovie(moviename);
+			
 			if(show.isEmpty())
 				throw new MovieNotFoundExceptions();
 			return show;
@@ -142,10 +151,14 @@ public class UserServiceImpl implements UserService {
 		}}
 		@Override
 		public void cancelTickets(int bookingid) {
-			if(bookrepo.getById(bookingid)==null)
+			BookTicket book=bookrepo.getById(bookingid);
+			if(book==null)
 				throw new InvalidBookingIdException();
 			
-			userepo.deleteById(bookingid);
+			ShowInformation show=bookrepo.getshowById(bookingid);
+			show.setBookingcount(show.getBookingcount()-book.getNoofticketsbooked());
+			bookrepo.deleteById(bookingid);
+			
 			
 		}
 		

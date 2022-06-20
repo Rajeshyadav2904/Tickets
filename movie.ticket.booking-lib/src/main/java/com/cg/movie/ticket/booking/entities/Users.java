@@ -16,17 +16,17 @@ public class Users {
 @GeneratedValue(generator="user_seq",strategy = GenerationType.SEQUENCE)
 private int userid;
 
-@Column(name="username",length=25)
+@Column(name="username",length=300)
 private String username;
-@Column(name="password",length=25)
+@Column(name="password",length=300)
 private String password;
 
-@Column(name="email",length=25)
+@Column(name="email",length=300)
 private String email;
-@Column(name="mobilenumber",length=25)
+@Column(name="mobilenumber",length=300)
 private long mobilenumber;
 
-@Column(name="role",length=25)
+@Column(name="role",length=300)
 private String role;
 
 public int getUserid() {

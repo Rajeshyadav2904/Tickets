@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,7 +23,7 @@ import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.services.ShowInchargeServiceImpl;
 import com.cg.movie.ticket.booking.services.UserServiceImpl;
 
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/show")
 public class ShowInchargeController {
@@ -53,7 +54,7 @@ public class ShowInchargeController {
 		return new ResponseEntity<List<ShowInformation>>(showList,HttpStatus.OK);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{showid}")
 	public ResponseEntity<String> updateShow(@RequestBody ShowDto show){
 		showservice.updateShowTimings(show);
 		return new ResponseEntity<String>("updated",HttpStatus.OK);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import com.cg.movie.ticket.booking.dto.TheatreDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.services.AdminServiceImpl;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
 public class AdminController{
@@ -58,8 +59,8 @@ public class AdminController{
 		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
   @PutMapping("/movie")
-	public ResponseEntity<String> editMovies(@RequestBody ShowInformation admin){
-		adminservice.updateMovies(admin);
+	public ResponseEntity<String> editMovies(@RequestBody ShowInformation show){
+		adminservice.updateMovies(show);
 		return new ResponseEntity<String>("updated",HttpStatus.OK);
 	}
   @DeleteMapping("/movie{showid}")

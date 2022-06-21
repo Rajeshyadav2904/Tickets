@@ -9,7 +9,8 @@ public class ShowDto {
 	private int totalnooftickets;
 	private int bookingcount;
 	private int theatreid;
-private String time;
+    private String time;
+    private int showid;
 	
 	
 	public Date getDate() {
@@ -49,18 +50,19 @@ public void setTime(String time) {
 	public void setTheatreid(int theatreid) {
 		this.theatreid = theatreid;
 	}
+	public int getShowid() {
+		return showid;
+	}
+	public void setShowid(int showid) {
+		this.showid = showid;
+	}
 	@Override
 	public String toString() {
 		return "ShowDto [moviename=" + moviename + ", date=" + date + ", totalnooftickets=" + totalnooftickets
-				+ ", bookingcount=" + bookingcount + ", theatreid=" + theatreid + ", time=" + time + "]";
+				+ ", bookingcount=" + bookingcount + ", theatreid=" + theatreid + ", time=" + time + ", showid="
+				+ showid + "]";
 	}
 	
-	
-	
-	
-	
-  
-   
 	
 	
 }

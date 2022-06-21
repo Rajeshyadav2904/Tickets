@@ -15,7 +15,6 @@ public interface AdminService{
 	List<ShowInformation> viewAllMovies();
 	void updateMovies(ShowInformation show);
 	void deleteMovies(int showid);
-	List<ShowInformation> viewShowDetails();
 	
 	String login(int userid,String password)throws UserNotFoundException;
 }

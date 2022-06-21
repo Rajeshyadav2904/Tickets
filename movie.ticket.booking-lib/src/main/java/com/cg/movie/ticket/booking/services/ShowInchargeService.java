@@ -11,11 +11,11 @@ import com.cg.movie.ticket.booking.exceptions.UserNotFoundException;
 
 public interface ShowInchargeService {
 	
-	int registerShowIncharge(UserDto s);
+	 int registerShowIncharge(UserDto s);
 	 int addShowTimings(ShowDto show);
 	 List<ShowInformation> viewAllShows();
-	 int updateShowTimings(ShowDto show);
 	 void deleteShowTimings(int showid);
 	 Optional<ShowInformation> getShowById(int showid)throws ShowNotFoundExceptions;
 	 String login(int userid,String password)throws UserNotFoundException;
+	 void updateShowTimings(ShowInformation show);
 }

@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService{
 		    admin.setTet(tet);
 		    admin.setMoviename(showdto.getMoviename());
 		    admin.setDate(showdto.getDate());
-		  admin.setTime(showdto.getTime());
+		    admin.setTime(showdto.getTime());
 		    admin.setTotalnooftickets(showdto.getTotalnooftickets());
 		    admin.setBookingcount(showdto.getBookingcount());
 		    showrepo.save(admin);
@@ -78,11 +78,7 @@ return null;
 
 	@Override
 	public void updateMovies(ShowInformation show) {
-		showrepo.save(show);
-		
-		
-	
-		
+		showrepo.save(show);	
 	}
 
 	@Override
@@ -90,12 +86,6 @@ return null;
 		 showrepo.deleteById(showid);	
 		
 	}
-
-	@Override
-	public List<ShowInformation> viewShowDetails() {
-		return showrepo.findAll();
-	}
-
 	
 
 	@Override

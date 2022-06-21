@@ -1,7 +1,6 @@
 package com.cg.movie.ticket.booking.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.movie.ticket.booking.dto.ShowDto;
 import com.cg.movie.ticket.booking.dto.TheatreDto;
 import com.cg.movie.ticket.booking.dto.UserDto;
 import com.cg.movie.ticket.booking.entities.ShowInformation;
 import com.cg.movie.ticket.booking.services.AdminServiceImpl;
+
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
@@ -47,12 +46,12 @@ public class AdminController{
 		return new ResponseEntity<String>("inserted theatre = "+theatreid,HttpStatus.OK);
   
   }
-  @GetMapping("/movie/{show}")
-	public ResponseEntity<List<ShowInformation>> getShowDetails(){
-		List<ShowInformation> adminList = adminservice.viewAllMovies();
-		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
-}
-	
+  
+  @GetMapping("/movie")
+  public ResponseEntity<List<ShowInformation>> getAllMovies(){
+  List<ShowInformation> adminList = adminservice.viewAllMovies();
+  return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
+  }
   
   @PutMapping("/movie")
 	public ResponseEntity<String> editMovies(@RequestBody ShowInformation show){

@@ -75,11 +75,8 @@ return null;
 	}
 
 	@Override
-	public int updateShowTimings(ShowDto show) {
-		ShowInformation addshow = new ShowInformation();
-	    addshow.setDate(show.getDate());
-	    showrepo.save(addshow);
-		return addshow.getShowid();
+	public void updateShowTimings(ShowInformation show) {
+		showrepo.save(show);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ int registrationUser(UserDto userdto);
 	
 	List<ShowInformation> searchShowByTheaterName(String theatrename)throws TheraterNotFoundException ;
 	List<ShowInformation> searchShowByMoviename(String moviename)throws MovieNotFoundExceptions;
-	List<ShowInformation> searchShowByDate(Date date)throws ShowNotFoundExceptions ;
+	
 	String login(int userid,String password)throws UserNotFoundException;
 	ViewTicketDto viewBookedTickets(int bookingid)throws InvalidBookingIdException;
 	int  bookingTickets(BookDto bookdto)throws InvalidBookingIdException;

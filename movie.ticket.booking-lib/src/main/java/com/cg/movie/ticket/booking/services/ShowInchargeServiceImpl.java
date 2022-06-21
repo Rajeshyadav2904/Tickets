@@ -44,6 +44,7 @@ public class ShowInchargeServiceImpl implements ShowInchargeService{
 	    admin.setTet(tet);;
 	    admin.setMoviename(showdto.getMoviename());
 	    admin.setDate(showdto.getDate());
+	    admin.setTime(showdto.getTime());
 	    admin.setTotalnooftickets(showdto.getTotalnooftickets());
 	    admin.setBookingcount(showdto.getBookingcount());
 	    showrepo.save(admin);

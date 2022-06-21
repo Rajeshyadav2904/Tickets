@@ -1,5 +1,6 @@
 package com.cg.movie.ticket.booking.entities;
 
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="ShowInformation")
 public class ShowInformation {
@@ -22,14 +25,19 @@ public class ShowInformation {
 	private String moviename;
 @Column(name="totalnooftickets",length=300)
 	private int totalnooftickets;
-@Column(name="date",length=300)
+
+@Column(name="date",columnDefinition = "date")
 	private Date date;
+@Column(name="time",length=300)
+private String time;
 @Column(name="bookingcount",length=300)
     private int bookingcount;
 
 public int getBookingcount() {
 	return bookingcount;
 }
+
+
 
 public void setBookingcount(int bookingcount) {
 	this.bookingcount = bookingcount;
@@ -65,13 +73,31 @@ public void setTotalnooftickets(int totalnooftickets) {
 	this.totalnooftickets = totalnooftickets;
 }
 
+
+
 public Date getDate() {
 	return date;
 }
 
+
+
 public void setDate(Date date) {
 	this.date = date;
 }
+
+
+
+public String getTime() {
+	return time;
+}
+
+
+
+public void setTime(String time) {
+	this.time = time;
+}
+
+
 
 public Theatre getTet() {
 	return tet;

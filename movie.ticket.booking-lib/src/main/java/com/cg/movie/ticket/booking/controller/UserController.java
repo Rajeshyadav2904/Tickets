@@ -57,13 +57,7 @@ public class UserController {
 		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
 	}
-	@GetMapping("/date/{date}")
-	public ResponseEntity<List<ShowInformation>> searchShowByDate(@PathVariable Date date)
-	{
-		List<ShowInformation> showlist=userservice.searchShowByDate(date);
-		return new ResponseEntity<List<ShowInformation>>(showlist,HttpStatus.OK);
 	
-	}
 	@GetMapping("/login/{userid}/{password}")
 	public String login(@PathVariable int  userid,@PathVariable String password){
 	return	userservice.login(userid, password);

@@ -53,11 +53,7 @@ public class AdminController{
 		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
 }
 	
-  @GetMapping("/movie")
-	public ResponseEntity<List<ShowInformation>> getAllMovies(){
-		List<ShowInformation> adminList = adminservice.viewAllMovies();
-		return new ResponseEntity<List<ShowInformation>>(adminList,HttpStatus.OK);
-}
+  
   @PutMapping("/movie")
 	public ResponseEntity<String> editMovies(@RequestBody ShowInformation show){
 		adminservice.updateMovies(show);

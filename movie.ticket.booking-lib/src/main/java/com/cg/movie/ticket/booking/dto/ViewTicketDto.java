@@ -1,10 +1,25 @@
 package com.cg.movie.ticket.booking.dto;
 
+import java.util.Date;
+
 public class ViewTicketDto {
 	private int  userid;
 	private String username;
 	private String moviename;
-
+     private Date date;
+     private String time;
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	private int noofticketsbooked;
 	private String theatrename;
 	private String location;
@@ -44,10 +59,6 @@ public class ViewTicketDto {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	@Override
-	public String toString() {
-		return "ViewTicketDto [userid=" + userid + ", username=" + username + ", moviename=" + moviename
-				+ ", noofticketsbooked=" + noofticketsbooked + ", theatrename=" + theatrename + ", location=" + location
-				+ "]";
-	}
+	
+	
 }

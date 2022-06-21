@@ -70,13 +70,7 @@ public class UserServiceImpl implements UserService {
 				throw new MovieNotFoundExceptions();
 			return show;
 		}
-		@Override
-		public List<ShowInformation> searchShowByDate(Date date) {
-			List<ShowInformation> show=showrepo.getShowByTimings(date);
-			if(show.isEmpty())
-				throw new ShowNotFoundExceptions();
-			return show;
-		}
+		
 		@Override
 		public ViewTicketDto viewBookedTickets(int bookingid) {
 			BookTicket book=bookrepo.getById(bookingid);
@@ -87,6 +81,8 @@ public class UserServiceImpl implements UserService {
 				throw new InvalidBookingIdException();
 			
 			ViewTicketDto vd=new ViewTicketDto();
+			vd.setDate(show.getDate());
+			vd.setTime(show.getTime());
 	        vd.setUserid(user.getUserid());
 	        vd.setUsername(user.getUsername());
 	        vd.setMoviename(show.getMoviename());
